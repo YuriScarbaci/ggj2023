@@ -1,3 +1,5 @@
+import type TreeModel from "tree-model";
+
 export interface IFungus {
   id: string;
   t: number;
@@ -10,34 +12,29 @@ export interface IRoot {
   length: number;
 }
 
-export interface IBaseElement {
+export type AnchorPoint = {
+  t: number;
   id: string;
-  t: number;
-}
+  x: number;
+  y: number;
+  territoryType: "resource" | "colonyPoint" | "desert" | "enemySpawnPoint";
+};
 
-export interface IWater extends IBaseElement {
-  amount: number;
-  type: "water";
-}
-export interface IFood extends IBaseElement {
-  amount: number;
-  type: "food";
-}
-
-export type IElement = IWater | IFood;
-
-export interface IAnchorPoint {
-  t: number;
-}
+export type ColonyPoint = {
+  fungusType: "poison" | "psycho" | "colony";
+  rootPoints: number;
+  hitPoints: number;
+  children: ColonyPoint[];
+} & AnchorPoint;
 
 export type IGameStoreContext = {
-  fungi: IFungus[];
-  roots: IRoot[];
-  elements: IElement[];
-  anchorPoints: IAnchorPoint[];
-
-  selectedFungus?: IFungus;
-
-  addRoot: (fromT: number, toT: number, element?: IElement) => void;
-  changeSelectedFungus: (fungusId: string) => void;
+  rootNode: TreeModel.Node<ColonyPoint>;
+  fungiTree?: TreeModel;
+  selectedFungus?: TreeModel.Node<ColonyPoint>;
+  anchorPoints: AnchorPoint[];
+  addRoot: ({}: {
+    anchorPoint: AnchorPoint;
+    parentNode: TreeModel.Node<ColonyPoint>;
+  }) => void;
+  setSelectedFungus: React.Dispatch<React.SetStateAction<TreeModel.Node<ColonyPoint>>>;
 };
