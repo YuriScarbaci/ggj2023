@@ -1,32 +1,25 @@
+import { tToPixel, T_UNIT, T_WORLD_RADIUS } from "@/settings";
 import { useGame } from "@/store";
 import { IRoot } from "@/store/types";
 import React from "react";
 import { useGameCanvas } from "./GameCanvas";
 
-function randomArc(x1: number, y1: number, x2: number, y2: number) {
+function randomArc(t1: number, t2: number) {
+  const x1 = tToPixel(t1);
+  const x2 = tToPixel(t2);
+
   let cx = x1 + (x2 - x1) / 2;
-  let cy = y1 + ((Math.random() * 0.6 + 0.3) * Math.abs(x2 - x1)) / 2;
-  return `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`;
+  let cy = 0 + ((Math.random() * 0.6 + 0.3) * Math.abs(x2 - x1)) / 2;
+  return `M ${x1} ${0} Q ${cx} ${cy} ${x2} ${0}`;
 }
 
 export function AnchorPoints() {
-  const { selectedFungus } = useGame();
+  const { selectedFungus, anchorPoints } = useGame();
 
   const [newAnchor, setNewAnchor] = React.useState<number | null>();
 
-  const size = useGameCanvas();
-  const worldRadius = React.useMemo(
-    () => Math.max(size.width, size.height) * 3,
-    [size]
-  );
-
-  const anchorPoints = React.useMemo(() => {
-    const amount = Math.trunc(worldRadius / 50);
-    return new Array(amount).fill(0).map((_, i) => i * 50 - worldRadius / 2);
-  }, [worldRadius]);
-
   const newRoot = React.useMemo(() => {
-    if (newAnchor !== null)
+    if (newAnchor !== null && selectedFungus)
       return {
         fromT: selectedFungus.t,
         toT: newAnchor,
@@ -36,7 +29,7 @@ export function AnchorPoints() {
 
   const handleMouseEnter = React.useCallback(
     (e: React.MouseEvent<SVGCircleElement>) => {
-      const point = (e.target as HTMLElement).getAttribute("cx");
+      const point = (e.target as HTMLElement).getAttribute("data-t");
       setNewAnchor(parseInt(point || "0", 10));
     },
     []
@@ -54,7 +47,8 @@ export function AnchorPoints() {
     <g>
       {anchorPoints.map((point) => (
         <circle
-          cx={point}
+          data-t={point.t}
+          cx={tToPixel(point.t)}
           cy={0}
           r={10}
           fill="rgb(0,0,0,0.1)"
@@ -66,31 +60,31 @@ export function AnchorPoints() {
       {newRoot && (
         <>
           <path
-            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            d={randomArc(newRoot.fromT, newRoot.toT)}
             fill="none"
             stroke="yellow"
             style={{ pointerEvents: "none" }}
           />
           <path
-            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            d={randomArc(newRoot.fromT, newRoot.toT)}
             fill="none"
             stroke="yellow"
             style={{ pointerEvents: "none" }}
           />
           <path
-            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            d={randomArc(newRoot.fromT, newRoot.toT)}
             fill="none"
             stroke="yellow"
             style={{ pointerEvents: "none" }}
           />
           <path
-            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            d={randomArc(newRoot.fromT, newRoot.toT)}
             fill="none"
             stroke="yellow"
             style={{ pointerEvents: "none" }}
           />
           <path
-            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            d={randomArc(newRoot.fromT, newRoot.toT)}
             fill="none"
             stroke="yellow"
             style={{ pointerEvents: "none" }}

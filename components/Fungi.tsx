@@ -1,6 +1,5 @@
 import { useGame } from "@/store";
-import { IFungus } from "@/store/types";
-import { Fungus } from "./Fungus";
+import { Fungus } from "./elements/Fungus";
 
 export function Fungi() {
   const { fungi } = useGame();
