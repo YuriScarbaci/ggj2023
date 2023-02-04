@@ -1,9 +1,8 @@
-import { randomArc, tToPixel, T_UNIT, T_WORLD_RADIUS } from "@/settings";
+import React from "react";
+import { randomArc } from "@/settings";
 import { useGame } from "@/store";
 import { AnchorPoint } from "@/store/types";
-import React from "react";
-import { Root } from "./elements/Root";
-import { useGameCanvas } from "./GameCanvas";
+import { Root } from "@/components/elements/Root";
 
 export function AnchorPoints() {
   const { selectedFungus, addRoot, anchorPoints, rootNode } = useGame();
