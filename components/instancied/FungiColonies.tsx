@@ -4,16 +4,15 @@ import { ColonyPoint } from "@/store/types";
 import { useGame } from "@/store";
 import { Fungus } from "@/components/elements/Fungus";
 import { Root } from "@/components/elements/Root";
-import PropTypes from "prop-types";
 import type TreeModel from "tree-model";
 
-export const FungiColonies = (props) => {
+export const FungiColonies = () => {
   const { rootNode, treeRerenderKey } = useGame();
   const fungi: TreeModel.Node<ColonyPoint>[] = [];
   const roots: string[][] = [[]];
   rootNode.walk((node) => {
     fungi.push(node);
-    node.children.forEach((childNode) => {
+    node.children.forEach((childNode: TreeModel.Node<ColonyPoint>) => {
       const rootsArcs: string[] = new Array(5)
         .fill(0)
         .map((_) => randomArc(node.model.t, childNode.model.t));
