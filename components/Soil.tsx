@@ -1,14 +1,14 @@
 import React from "react";
 import { useGameCanvas } from "./GameCanvas";
 
-export function Soil() {
+export function Soil(props: React.PropsWithChildren<{}>) {
   const size = useGameCanvas();
   const worldRadius = React.useMemo(
     () => Math.max(size.width, size.height) * 3,
     [size]
   );
   return (
-    <g>
+    <g transform={`translate(0, ${(3 * size.height) / 4})`}>
       <rect
         width={worldRadius * 2}
         x={-worldRadius / 2}
@@ -31,6 +31,7 @@ export function Soil() {
           />
         </pattern>
       </defs>
+      <g>{props.children}</g>
     </g>
   );
 

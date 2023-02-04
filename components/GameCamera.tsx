@@ -1,15 +1,28 @@
 import React from "react";
 import { useGameCanvas } from "./GameCanvas";
 
+type IGameCameraContext = {
+  translation: number;
+};
+
+const GameCameraContext = React.createContext<IGameCameraContext>({
+  translation: 0,
+});
+
+export function useGameCamera() {
+  return React.useContext(GameCameraContext);
+}
+
 export function GameCamera(props: React.PropsWithChildren<{}>) {
   const size = useGameCanvas();
 
-  const [rotation, setRotation] = React.useState(0);
+  const [translation, setTranslation] = React.useState(0);
 
-  const worldRadius = React.useMemo(
-    () => Math.max(size.width, size.height) * 3,
-    [size]
-  );
+  React.useEffect(() => {
+    const handleMouseDown = () => {};
+
+    document.addEventListener("mousedown", handleMouseDown);
+  }, []);
 
   const handleWorldClick = React.useCallback(
     (e: React.MouseEvent<SVGRectElement>) => {
@@ -27,7 +40,7 @@ export function GameCamera(props: React.PropsWithChildren<{}>) {
 
         // const deltaAngle = Math.atan(deltaX / worldRadius);
 
-        setRotation((rot) => rot + deltaX);
+        setTranslation((trans) => trans + deltaX);
       };
 
       const handleMouseUp = () => {
@@ -41,28 +54,20 @@ export function GameCamera(props: React.PropsWithChildren<{}>) {
     []
   );
 
+  const contextValue = React.useMemo(() => {
+    return {
+      translation,
+    };
+  }, [translation]);
+
   return (
     <g
-      transform={`translate(${rotation + size.width / 2}, ${
-        (3 * size.height) / 4
-      })`}
+      transform={`translate(${translation + size.width / 2}, 0)`}
       onMouseDown={handleWorldClick}
     >
-      {props.children}
+      <GameCameraContext.Provider value={contextValue}>
+        {props.children}
+      </GameCameraContext.Provider>
     </g>
   );
-
-  // return (
-  //   <g>
-  //     <circle
-  //       cx={size.width / 2}
-  //       cy={worldRadius + (3 * size.height) / 4}
-  //       r={worldRadius}
-  //       fill="black"
-  //       onMouseDown={handleWorldClick}
-  //       // fill="url(#ground)"
-  //     />
-
-  //   </g>
-  // );
 }

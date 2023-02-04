@@ -16,7 +16,6 @@ export default function Home() {
       <EventsStore>
         <GameStore>
           <GameCanvas>
-            <Background />
             <GameCamera>
               <Soil />
               <FungiColonies />
