@@ -43,7 +43,9 @@ export function GameCamera(props: React.PropsWithChildren<{}>) {
 
   return (
     <g
-      transform={`translate(${rotation}, ${(3 * size.height) / 4})`}
+      transform={`translate(${rotation + size.width / 2}, ${
+        (3 * size.height) / 4
+      })`}
       onMouseDown={handleWorldClick}
     >
       {props.children}

@@ -5,7 +5,7 @@ import { useGameCanvas } from "./GameCanvas";
 
 function randomArc(x1: number, y1: number, x2: number, y2: number) {
   let cx = x1 + (x2 - x1) / 2;
-  let cy = y1 + ((Math.random() + 0.3) * Math.abs(x2 - x1)) / 2;
+  let cy = y1 + ((Math.random() * 0.6 + 0.3) * Math.abs(x2 - x1)) / 2;
   return `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`;
 }
 
@@ -64,12 +64,38 @@ export function AnchorPoints() {
         />
       ))}
       {newRoot && (
-        <path
-          d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
-          fill="none"
-          stroke="black"
-          style={{ pointerEvents: "none" }}
-        />
+        <>
+          <path
+            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            fill="none"
+            stroke="yellow"
+            style={{ pointerEvents: "none" }}
+          />
+          <path
+            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            fill="none"
+            stroke="yellow"
+            style={{ pointerEvents: "none" }}
+          />
+          <path
+            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            fill="none"
+            stroke="yellow"
+            style={{ pointerEvents: "none" }}
+          />
+          <path
+            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            fill="none"
+            stroke="yellow"
+            style={{ pointerEvents: "none" }}
+          />
+          <path
+            d={randomArc(newRoot.fromT, 0, newRoot.toT, 0)}
+            fill="none"
+            stroke="yellow"
+            style={{ pointerEvents: "none" }}
+          />
+        </>
       )}
     </g>
   );
