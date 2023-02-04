@@ -8,6 +8,9 @@ export const GameStoreContext = React.createContext<IGameStoreContext>({
   elements: [],
   fungi: [],
   roots: [],
+  anchorPoints: [],
+  addRoot: () => {},
+  changeSelectedfungus: () => {},
 });
 
 export function useGame() {
@@ -33,7 +36,7 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
     },
   ]);
   const [roots, setRoots] = React.useState<IRoot[]>([]);
-  const [selectedFungusId, setSelectedFungisId] = React.useState<string>(
+  const [selectedFungusId, setSelectedFungisId] = React.useState<string | null>(
     fungi[0].id
   );
 
@@ -51,6 +54,42 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
     return fungi.find((row) => row.id === selectedFungusId);
   }, [fungi, selectedFungusId]);
 
+  const addRoot = React.useCallback(
+    (fromT: number, toT: number, element?: IElement) => {
+      setRoots((roots) => {
+        return [
+          ...roots,
+          {
+            fromT,
+            toT,
+            length: Math.abs(fromT - toT),
+          },
+        ];
+      });
+
+      if (!element) {
+        setFungi((fungi) => {
+          return [
+            ...fungi,
+            {
+              id: uuid(),
+              points: 1,
+              t: toT,
+            },
+          ];
+        });
+      }
+    },
+    []
+  );
+
+  const changeSelectedFungus = React.useCallback(
+    (fungusId: string) => {
+      setSelectedFungisId(fungi.find((row) => row.id === fungusId)?.id || null);
+    },
+    [fungi]
+  );
+
   const contextValue = React.useMemo(
     () => ({
       fungi,
@@ -58,8 +97,18 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       selectedFungus,
       elements,
       anchorPoints,
+      addRoot,
+      changeSelectedFungus,
     }),
-    [fungi, roots, selectedFungus, elements]
+    [
+      fungi,
+      roots,
+      selectedFungus,
+      elements,
+      anchorPoints,
+      addRoot,
+      changeSelectedFungus,
+    ]
   );
 
   return (

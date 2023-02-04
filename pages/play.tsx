@@ -10,6 +10,7 @@ import { Soil } from "@/components/Soil";
 import { AnchorPoints } from "@/components/AnchorPoints";
 import { Fungi } from "@/components/Fungi";
 import { FoodSources } from "@/components/FoodSources";
+import { Roots } from "@/components/Roots";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
             <Background />
             <GameCamera>
               <Soil />
+              <Roots />
               <AnchorPoints />
               <FoodSources />
               <Fungi />

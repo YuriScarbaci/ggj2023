@@ -37,4 +37,7 @@ export type IGameStoreContext = {
   anchorPoints: IAnchorPoint[];
 
   selectedFungus?: IFungus;
+
+  addRoot: (fromT: number, toT: number, element?: IElement) => void;
+  changeSelectedFungus: (fungusId: string) => void;
 };
