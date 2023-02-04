@@ -18,13 +18,14 @@ export default function Home() {
       <EventsStore>
         <GameStore>
           <GameCanvas>
-            <Background />
             <GameCamera>
-              <Soil />
-              <Roots />
-              <AnchorPoints />
-              <FoodSources />
-              <Fungi />
+              <Background />
+              <Soil>
+                <Roots />
+                <AnchorPoints />
+                <FoodSources />
+                <Fungi />
+              </Soil>
             </GameCamera>
           </GameCanvas>
         </GameStore>
