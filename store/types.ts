@@ -5,8 +5,8 @@ export interface IFungus {
 }
 
 export interface IRoot {
-  from: string;
-  to: string;
+  fromT: number;
+  toT: number;
   length: number;
 }
 
