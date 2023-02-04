@@ -11,12 +11,14 @@ import { AnchorPoints } from "@/components/AnchorPoints";
 import { Fungi } from "@/components/Fungi";
 import { FoodSources } from "@/components/FoodSources";
 import { Roots } from "@/components/Roots";
+import { Board } from "@/components/Board";
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <EventsStore>
         <GameStore>
+          <Board />
           <GameCanvas>
             <GameCamera>
               <Background />
