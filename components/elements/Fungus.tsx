@@ -8,7 +8,7 @@ interface IFungusProps {
 }
 
 export function Fungus(props: IFungusProps) {
-  const { changeSelectedFungus } = useGame();
+  const { changeSelectedFungus, selectedFungus } = useGame();
 
   const handleClick = React.useCallback(() => {
     changeSelectedFungus(props.fungus.id);
@@ -21,6 +21,8 @@ export function Fungus(props: IFungusProps) {
         cy={0}
         r={20}
         fill="yellow"
+        stroke={selectedFungus?.id === props.fungus.id ? "green" : ""}
+        strokeWidth={3}
         onClick={handleClick}
       />
     </g>
