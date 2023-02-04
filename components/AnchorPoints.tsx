@@ -1,17 +1,8 @@
-import { tToPixel, T_UNIT, T_WORLD_RADIUS } from "@/settings";
+import { randomArc, tToPixel, T_UNIT, T_WORLD_RADIUS } from "@/settings";
 import { useGame } from "@/store";
 import { IRoot } from "@/store/types";
 import React from "react";
 import { useGameCanvas } from "./GameCanvas";
-
-function randomArc(t1: number, t2: number) {
-  const x1 = tToPixel(t1);
-  const x2 = tToPixel(t2);
-
-  let cx = x1 + (x2 - x1) / 2;
-  let cy = 0 + ((Math.random() * 0.6 + 0.3) * Math.abs(x2 - x1)) / 2;
-  return `M ${x1} ${0} Q ${cx} ${cy} ${x2} ${0}`;
-}
 
 export function AnchorPoints() {
   const { selectedFungus, anchorPoints } = useGame();
