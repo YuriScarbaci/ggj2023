@@ -1,10 +1,10 @@
 import React from "react";
 
-interface IRootProps {
+interface RootProps {
   arcs: string[];
 }
 
-export function Root(props: IRootProps) {
+export function Root(props: RootProps) {
   return (
     <g>
       {props.arcs?.map((arc, i) => (

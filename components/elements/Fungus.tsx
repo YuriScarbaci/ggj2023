@@ -4,11 +4,11 @@ import { ColonyPoint } from "@/store/types";
 import React from "react";
 import type TreeModel from "tree-model";
 
-interface IFungusProps {
+interface FungusProps {
   fungus: TreeModel.Node<ColonyPoint>;
 }
 
-export function Fungus(props: IFungusProps) {
+export function Fungus(props: FungusProps) {
   const { setSelectedFungus, selectedFungus } = useGame();
 
   const handleClick = React.useCallback(() => {

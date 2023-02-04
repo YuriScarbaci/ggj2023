@@ -1,18 +1,14 @@
 import * as React from "react";
 import { useEvents } from "./Events";
-import { IElement, IGameStoreContext } from "./types";
+import { IGameStoreContext } from "./types";
 import { v4 as uuid } from "uuid";
 import { tToPixel, T_WORLD_RADIUS } from "@/settings";
 import { AnchorPoint, ColonyPoint } from "@/store/types";
 import TreeModel from "tree-model";
 
-export const GameStoreContext = React.createContext<IGameStoreContext>({
-  fungiTree: undefined,
-  selectedFungus: undefined,
-  anchorPoints: [],
-  addRoot: () => {},
-  setSelectedFungus: () => {},
-});
+export const GameStoreContext = React.createContext<IGameStoreContext>(
+  {} as IGameStoreContext
+);
 
 const rootAnchorPointUid = uuid();
 export function useGame() {
@@ -66,10 +62,6 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       parentNode.addChild(newNode);
       parentNode.rootPoints =
         parentNode.rootPoints - (expandCost + newRootPoints);
-      console.log(
-        "add has already happens, add thinks parentNode is:",
-        parentNode
-      );
       setTreeRerenderKey((o) => o + 1);
     },
     [fungiTree]

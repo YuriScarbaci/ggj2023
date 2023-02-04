@@ -1,17 +1,5 @@
 import type TreeModel from "tree-model";
 
-export interface IFungus {
-  id: string;
-  t: number;
-  points: number;
-}
-
-export interface IRoot {
-  fromT: number;
-  toT: number;
-  length: number;
-}
-
 export type AnchorPoint = {
   t: number;
   id: string;
@@ -28,13 +16,16 @@ export type ColonyPoint = {
 } & AnchorPoint;
 
 export type IGameStoreContext = {
-  rootNode: TreeModel.Node<ColonyPoint>;
+  treeRerenderKey: number;
   fungiTree?: TreeModel;
+  rootNode: TreeModel.Node<ColonyPoint>;
   selectedFungus?: TreeModel.Node<ColonyPoint>;
   anchorPoints: AnchorPoint[];
   addRoot: ({}: {
     anchorPoint: AnchorPoint;
     parentNode: TreeModel.Node<ColonyPoint>;
   }) => void;
-  setSelectedFungus: React.Dispatch<React.SetStateAction<TreeModel.Node<ColonyPoint>>>;
+  setSelectedFungus: React.Dispatch<
+    React.SetStateAction<TreeModel.Node<ColonyPoint>>
+  >;
 };
