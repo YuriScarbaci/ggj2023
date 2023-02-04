@@ -24,6 +24,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "resize-observer-polyfill": "^1.5.1",
+    "tree-model": "^1.0.7",
     "typescript": "4.9.5",
     "uuid": "^9.0.0"
   }
