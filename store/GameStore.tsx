@@ -29,9 +29,11 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
   const { triggerEvent, subscribeEvent, unsubscribeEvent } = useEvents();
   const {
     traitPoints,
+    traits,
     addTraitPoints,
     spendTraitPoints,
     canSpendTraitsPoints,
+    revertTrait,
   } = useTraitPoints();
 
   const [targets, setTargets] = React.useState({ left: null, right: null });
@@ -68,6 +70,11 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       addRoot,
       setSelectedFungus,
       traitPoints,
+      traits,
+      addTraitPoints,
+      spendTraitPoints,
+      canSpendTraitsPoints,
+      revertTrait,
       totalColonies,
       enemies,
       selectedTypeOfFungusSelector,
@@ -85,6 +92,11 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       addRoot,
       setSelectedFungus,
       traitPoints,
+      traits,
+      addTraitPoints,
+      spendTraitPoints,
+      canSpendTraitsPoints,
+      revertTrait,
       totalColonies,
       enemies,
       selectedTypeOfFungusSelector,

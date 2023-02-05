@@ -1,0 +1,32 @@
+.cls1Pressed {
+    fill: #5c8e52;
+  }
+
+  .cls2Pressed {
+    fill: #025104;
+  }
+
+  .cls3Pressed {
+    fill: #fff;
+    font-family: RetroGaming, 'Retro Gaming';
+    font-size: 18px;
+  }
+
+  .cls4Pressed {
+    fill: #22990a;
+  }
+
+
+  .cls1 {
+    fill: #444;
+  }
+
+  .cls2 {
+    fill: #fff;
+    font-family: RetroGaming, 'Retro Gaming';
+    font-size: 18px;
+  }
+
+  .cls3 {
+    fill: #494949;
+  }

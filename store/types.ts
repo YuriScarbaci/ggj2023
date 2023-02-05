@@ -36,6 +36,10 @@ export interface Ant extends Enemy {
   type: "Ant";
 }
 
+export type traitsType = {
+  poison: number; psyco: number; hp: number; 
+};
+
 export type IGameStoreContext = {
   treeRerenderKey: number;
   fungiTree?: TreeModel;
@@ -47,6 +51,11 @@ export type IGameStoreContext = {
   targets: Targets;
   anchorPoints: AnchorPoint[];
   traitPoints: number;
+  traits: traitsType,
+  addTraitPoints: (n: number, name: string) => void,
+  spendTraitPoints: (n: number, name: string) => void,
+  canSpendTraitsPoints: () => boolean,
+  revertTrait: (n: number, name: string) => void,
   totalColonies: number;
   selectedTypeOfFungusSelector: "poison" | "colony";
   setSelectedTypeOfFungusSelector: React.Dispatch<
