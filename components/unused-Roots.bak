@@ -6,9 +6,11 @@ import { Root } from "./elements/Root";
 import { useGameCanvas } from "./GameCanvas";
 
 export function Roots() {
-  const { roots } = useGame();
+  const { fungiTree } = useGame();
 
-  console.log(roots)
+  const roots = [];
+
+  console.log(fungiTree, fungiTree.flatMap());
 
   return (
     <g>

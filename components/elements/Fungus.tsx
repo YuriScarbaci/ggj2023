@@ -1,30 +1,36 @@
 import { tToPixel } from "@/settings";
 import { useGame } from "@/store";
-import { IFungus } from "@/store/types";
+import { ColonyPoint } from "@/store/types";
 import React from "react";
+import type TreeModel from "tree-model";
 
-interface IFungusProps {
-  fungus: IFungus;
+interface FungusProps {
+  fungus: TreeModel.Node<ColonyPoint>;
 }
 
-export function Fungus(props: IFungusProps) {
-  const { changeSelectedFungus, selectedFungus } = useGame();
+export function Fungus(props: FungusProps) {
+  const { setSelectedFungus, selectedFungus } = useGame();
 
   const handleClick = React.useCallback(() => {
-    changeSelectedFungus(props.fungus.id);
-  }, [props.fungus]);
+    setSelectedFungus(props.fungus);
+  }, [setSelectedFungus, props.fungus]);
 
   return (
     <g>
       <circle
-        cx={tToPixel(props.fungus.t)}
+        cx={props.fungus.model.x}
         cy={0}
         r={20}
         fill="yellow"
-        stroke={selectedFungus?.id === props.fungus.id ? "green" : ""}
+        stroke={
+          selectedFungus?.model.id === props.fungus.model.id ? "green" : ""
+        }
         strokeWidth={3}
         onClick={handleClick}
       />
+      <text x={props.fungus.model.x-9} y={5}>
+        {props.fungus.model.rootPoints}
+      </text>
     </g>
   );
 }
