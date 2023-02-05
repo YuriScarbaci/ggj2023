@@ -21,11 +21,25 @@ export type ColonyPoint = {
   children: ColonyPoint[];
 } & AnchorPoint;
 
+export type Ant = {
+  id: string;
+  t: number;
+  points: number;
+  target: any;
+  startSide: string;
+}
+
+export type Enemy = {
+  type: string;
+} & Ant;
+
 export type IGameStoreContext = {
   treeRerenderKey: number;
   fungiTree?: TreeModel;
   rootNode: TreeModel.Node<ColonyPoint>;
   selectedFungus?: TreeModel.Node<ColonyPoint>;
+  enemies?:  TreeModel.Node<Enemy>;
+  removeFungus?: () => void;
   anchorPoints: AnchorPoint[];
   traitPoints: number;
   totalRootPoints: number;
