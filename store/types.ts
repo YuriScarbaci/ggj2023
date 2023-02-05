@@ -16,7 +16,7 @@ export type AnchorPoint = {
 };
 
 export type ColonyPoint = {
-  fungusType: "poison" | "psycho" | "colony";
+  fungusType: "poison" | "resource" | "colony";
   rootPoints: number;
   hitPoints: number;
   children: ColonyPoint[];

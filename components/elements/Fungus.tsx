@@ -10,54 +10,48 @@ interface FungusProps {
 
 export function Fungus(props: FungusProps) {
   const { setSelectedFungus, selectedFungus } = useGame();
-
+  const { id, x, rootPoints, fungusType } = props.fungus.model;
   const handleClick = React.useCallback(() => {
-    setSelectedFungus(props.fungus);
-  }, [setSelectedFungus, props.fungus]);
+    if (fungusType === "colony") setSelectedFungus(props.fungus);
+  }, [fungusType, setSelectedFungus, props.fungus]);
 
   return (
     <g>
       <g>
-        <ellipse 
-          cx={props.fungus.model.x}
+        <ellipse
+          cx={x}
           cy={-24}
           rx={28}
           ry={25}
           fillOpacity="0.5"
-          strokeOpacity="0.7" 
-          fill={
-            selectedFungus?.model.id === props.fungus.model.id ? "lightgreen" : "transparent"
-          }
-          stroke={
-            selectedFungus?.model.id === props.fungus.model.id ? "lime" : "transparent"
-          }
+          strokeOpacity="0.7"
+          fill={selectedFungus?.model.id === id ? "lightgreen" : "transparent"}
+          stroke={selectedFungus?.model.id === id ? "lime" : "transparent"}
         />
       </g>
       <g>
         <image
-          href={`./textures/${selectedFungus?.model.fungusType}_64x64.png`}
-          x={props.fungus.model.x - 26}
+          href={`./textures/${fungusType}_64x64.png`}
+          x={x - 26}
           y={-47}
           width="50px"
           height="50px"
           onClick={handleClick}
         />
 
-        <ellipse 
-          cx={props.fungus.model.x + 12}
+        <ellipse
+          cx={x + 12}
           cy={15}
           rx={30}
           ry={10}
           fillOpacity="0.3"
           fill="black"
         />
-        <text
-          x={props.fungus.model.x-14}
-          y={20}
-         fill={props.fungus.model.rootPoints > 0 ? "lime" :"white"}
-         >
-         RP: {props.fungus.model.rootPoints}
-        </text>
+        {fungusType === "colony" ? (
+          <text x={x - 14} y={20} fill={rootPoints > 0 ? "lime" : "white"}>
+            RP: {rootPoints}
+          </text>
+        ) : null}
       </g>
     </g>
   );

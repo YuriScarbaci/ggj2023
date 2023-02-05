@@ -51,11 +51,16 @@ const handleNodesRootPointsAndChildren = ({
 }) => {
   const parentMinusCost = parentNode.model.rootPoints - expandCost;
   const newRootPoints = Math.floor(parentMinusCost / 2);
-  const parentMinusCostMinusShare = parentMinusCost - newRootPoints;
+  const newPointType =
+    anchorPoint.territoryType === "colonyPoint" ? "colony" : "resource";
+  const parentMinusCostMinusShare =
+    newPointType === "colony"
+      ? parentMinusCost - newRootPoints
+      : parentMinusCost;
   const newNode = fungiTree.parse({
     ...anchorPoint,
-    fungusType: "colony",
-    rootPoints: newRootPoints,
+    fungusType: newPointType,
+    rootPoints: newPointType === "colony" ? newRootPoints : 0,
     hitPoints: 5,
   });
   parentNode.model.rootPoints = parentMinusCostMinusShare;
