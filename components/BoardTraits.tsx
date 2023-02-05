@@ -1,50 +1,66 @@
 import localFont from "@next/font/local";
+import { TraitButton } from "./TraitButton";
+import { useTraitPoints } from "@/store/game-logics/useTraitPoints";
+import { useGame } from "@/store";
 
 const RetroGaming = localFont({
   src: "../styles/fonts/retro-gaming.ttf",
 });
 
 export function BoardTraits() {
-  const hitPoints = 1;
-  const poison = 1;
-  const psychedelics = 1;
+  const { traits, treeRerenderKey } = useGame();
+
   return (
-    <g transform="translate(56.06 42.52)">
+    <g transform="translate(56.06 42.52)" key={treeRerenderKey}>
       <path fill="#003534" d="M6 6h349v132H6z" />
       <path
         fill="#1e1e1e"
         d="M4 0h353v4H4zM0 4h4v136H0zm357 0h4v136h-4zM4 140h353v4H4z"
       />
-      <text
-        fill="#fff"
-        className={RetroGaming.className}
-        fontSize="18px"
-        transform="translate(56 43)"
-      >
-        <tspan x={0} y={0}>
-          Max Hit Points: {hitPoints}
-        </tspan>
-      </text>
-      <text
-        fill="#fff"
-        className={RetroGaming.className}
-        fontSize="18px"
-        transform="translate(56 79)"
-      >
-        <tspan x={0} y={0}>
-          Poison points: {poison}
-        </tspan>
-      </text>
-      <text
-        fill="#fff"
-        className={RetroGaming.className}
-        fontSize="18px"
-        transform="translate(56 115)"
-      >
-        <tspan x={0} y={0}>
-          Psychedelics points: {psychedelics}
-        </tspan>
-      </text>
+      <g>
+        <text
+          fill="#fff"
+          className={RetroGaming.className}
+          fontSize="15px"
+          transform="translate(56 43)"
+        >
+          <tspan x={0} y={0}>
+            Max Hit Points: {traits.hp}
+          </tspan>
+        </text>
+        <g transform="translate(292 27)"><TraitButton type="add"  name="hp" /></g>
+        <g transform="translate(325 27)"><TraitButton type="remove"  name="hp" /></g>
+      </g>
+      <g>
+        <text
+          fill="#fff"
+          className={RetroGaming.className}
+          fontSize="15px"
+          transform="translate(56 79)"
+        >
+          <tspan x={0} y={0}>
+            Poison points: {traits.poison}
+          </tspan>
+        </text>
+        <g transform="translate(292 62)"><TraitButton type="add"  name="poison"  /></g>
+        <g transform="translate(325 62)"><TraitButton type="remove"  name="poison" /></g>
+      </g>
+
+      <g>
+        <text
+          fill="#fff"
+          className={RetroGaming.className}
+          fontSize="15px"
+          transform="translate(56 115)"
+        >
+          <tspan x={0} y={0}>
+            Psychedelics points: {traits.psyco}
+          </tspan>
+        </text>
+        <g transform="translate(292 98)"> <TraitButton type="add" name="psyco" /></g>
+        <g transform="translate(325 98)"><TraitButton type="remove" name="psyco" /></g>
+      </g>
+
       <path fill="#2e2e2e" d="M353 65v71H8V65H4v75h353V65h-4Z" />
       <path fill="#494949" d="M8 67V7h345v60h4V4H4v63h4Z" />
       <path

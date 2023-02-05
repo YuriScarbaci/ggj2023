@@ -29,9 +29,11 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
   const { triggerEvent, subscribeEvent, unsubscribeEvent } = useEvents();
   const {
     traitPoints,
+    traits,
     addTraitPoints,
     spendTraitPoints,
     canSpendTraitsPoints,
+    revertTrait,
   } = useTraitPoints();
   const { addRoot, treeRerenderKey, setTreeRerenderKey, fungiTree, rootNode } =
     useShroomsTree({
@@ -124,6 +126,11 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       addRoot,
       setSelectedFungus,
       traitPoints,
+      traits,
+      addTraitPoints,
+      spendTraitPoints,
+      canSpendTraitsPoints,
+      revertTrait,
       totalColonies,
       enemies,
       removeFungus,
@@ -137,6 +144,11 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       addRoot,
       setSelectedFungus,
       traitPoints,
+      traits,
+      addTraitPoints,
+      spendTraitPoints,
+      canSpendTraitsPoints,
+      revertTrait,
       totalColonies,
       enemies,
       removeFungus,
