@@ -22,10 +22,15 @@ export function Fungus(props: FungusProps) {
         cy={0}
         r={20}
         fill="yellow"
-        stroke={selectedFungus?.model.id === props.fungus.model.id ? "green" : ""}
+        stroke={
+          selectedFungus?.model.id === props.fungus.model.id ? "green" : ""
+        }
         strokeWidth={3}
         onClick={handleClick}
       />
+      <text x={props.fungus.model.x-9} y={5}>
+        {props.fungus.model.rootPoints}
+      </text>
     </g>
   );
 }

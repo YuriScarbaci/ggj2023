@@ -48,11 +48,11 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       anchorPoint: AnchorPoint;
       parentNode: TreeModel.Node<ColonyPoint>;
     }) => {
-      const [x1, x2] = [parentNode.x, anchorPoint.x].sort();
-      const expandCost = x2 - x1;
-      const newRootPoints = Math.floor(
-        (expandCost - parentNode.rootPoints) / 2
-      );
+      const [t1, t2] = [parentNode.model.t, anchorPoint.t].sort();
+      const expandCost = t2 - t1;
+      const parentMinusCost = parentNode.model.rootPoints - expandCost;
+      const newRootPoints = Math.floor(parentMinusCost / 2);
+      const parentMinusCostMinusShare = parentMinusCost - newRootPoints;
       const newNode = fungiTree.parse({
         ...anchorPoint,
         fungusType: "colony",
@@ -60,8 +60,7 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
         hitPoints: 5,
       });
       parentNode.addChild(newNode);
-      parentNode.rootPoints =
-        parentNode.rootPoints - (expandCost + newRootPoints);
+      parentNode.model.rootPoints = parentMinusCostMinusShare;
       setTreeRerenderKey((o) => o + 1);
     },
     [fungiTree]
