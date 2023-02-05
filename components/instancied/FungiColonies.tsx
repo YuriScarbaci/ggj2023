@@ -24,13 +24,13 @@ export const FungiColonies = () => {
   return (
     <g key={treeRerenderKey}>
       <g>
-        {fungi.map((fungus, i) => (
-          <Fungus key={`fungus-${fungus.model.id}`} fungus={fungus} />
+        {roots.map((root, i) => (
+          <Root key={`roots-${i}`} arcs={root} />
         ))}
       </g>
       <g>
-        {roots.map((root, i) => (
-          <Root key={`roots-${i}`} arcs={root} />
+        {fungi.map((fungus, i) => (
+          <Fungus key={`fungus-${fungus.model.id}`} fungus={fungus} />
         ))}
       </g>
     </g>

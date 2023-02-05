@@ -3,7 +3,7 @@ import { useEvents } from "./Events";
 import { IGameStoreContext } from "./types";
 import { v4 as uuid } from "uuid";
 import { tToPixel, T_WORLD_RADIUS } from "@/settings";
-import { AnchorPoint, ColonyPoint } from "@/store/types";
+import { AnchorPoint, ColonyPoint, TerritoryType } from "@/store/types";
 import TreeModel from "tree-model";
 
 export const GameStoreContext = React.createContext<IGameStoreContext>(
@@ -26,7 +26,7 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
         t: 0,
         x: 0,
         y: 0,
-        territoryType: "colonyPoint",
+        territoryType: "colonyPoint" as TerritoryType,
         fungusType: "colony",
         rootPoints: 10,
         hitPoints: 5,
@@ -38,7 +38,7 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
   const { triggerEvent, subscribeEvent, unsubscribeEvent } = useEvents();
 
   const [selectedFungus, setSelectedFungus] =
-    React.useState<TreeModel.Node<ColonyPoint> | null>(rootNode);
+    React.useState<TreeModel.Node<ColonyPoint>>(rootNode);
 
   const addRoot = React.useCallback(
     ({
@@ -73,7 +73,7 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       x: tToPixel(i - T_WORLD_RADIUS / 2),
       y: 0,
       territoryType:
-        i % 3 === 0 ? "colonyPoint" : i % 2 === 0 ? "desert" : "resource",
+        (i % 3 === 0 ? "colonyPoint" : i % 2 === 0 ? "desert" : "resource" ) as TerritoryType,
     }));
     return tentativePoints;
 
