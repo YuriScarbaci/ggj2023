@@ -20,7 +20,7 @@ export function AnchorPoints() {
   }, [hoverAnchorT, selectedFungus]);
 
   const handleMouseEnter = React.useCallback(
-    (e: React.MouseEvent<SVGCircleElement>) => {
+    (e: React.MouseEvent<SVGEllipseElement>) => {
       const point = (e.target as HTMLElement).dataset.t;
       setHoverAnchorT(parseInt(point || "0", 10));
     },
@@ -28,7 +28,7 @@ export function AnchorPoints() {
   );
 
   const handleMouseLeave = React.useCallback(
-    (e: React.MouseEvent<SVGCircleElement>) => {
+    (e: React.MouseEvent<SVGEllipseElement>) => {
       setHoverAnchorT(null);
     },
     []
