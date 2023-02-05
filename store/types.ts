@@ -1,6 +1,10 @@
 import type TreeModel from "tree-model";
 
-export type TerritoryType = "resource" | "colonyPoint" | "desert" | "enemySpawnPoint";
+export type TerritoryType =
+  | "resource"
+  | "colonyPoint"
+  | "desert"
+  | "enemySpawnPoint";
 
 export type AnchorPoint = {
   t: number;
@@ -23,6 +27,9 @@ export type IGameStoreContext = {
   rootNode: TreeModel.Node<ColonyPoint>;
   selectedFungus?: TreeModel.Node<ColonyPoint>;
   anchorPoints: AnchorPoint[];
+  traitPoints: number;
+  totalRootPoints: number;
+  totalColonies: number;
   addRoot: ({}: {
     anchorPoint: AnchorPoint;
     parentNode: TreeModel.Node<ColonyPoint>;
