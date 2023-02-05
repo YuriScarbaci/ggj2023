@@ -10,6 +10,7 @@ import { AnchorPoints } from "@/components/statics/AnchorPoints";
 import { FungiColonies } from "@/components/instancied/FungiColonies";
 import { BoardTraits } from "@/components/BoardTraits";
 import { BoardGlobalStats } from "@/components/BoardGlobalStats";
+import { Enemies } from "@/components/instancied/Enemies";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
               <Soil>
                 <AnchorPoints />
                 <FungiColonies />
+                <Enemies />
               </Soil>
             </GameCamera>
           </GameCanvas>
