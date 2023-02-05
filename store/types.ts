@@ -22,7 +22,7 @@ export type ColonyPoint = {
   children: ColonyPoint[];
 } & AnchorPoint;
 
-export type Ant = {
+export type Enemy = {
   id: string;
   t: number;
   points: number;
@@ -30,9 +30,9 @@ export type Ant = {
   startSide: string;
 };
 
-export type Enemy = {
-  type: string;
-} & Ant;
+export type Ant = {
+  type: 'Ant';
+} & Enemy;
 
 export type IGameStoreContext = {
   treeRerenderKey: number;
