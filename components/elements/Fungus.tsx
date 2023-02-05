@@ -17,20 +17,35 @@ export function Fungus(props: FungusProps) {
 
   return (
     <g>
-      <circle
-        cx={props.fungus.model.x}
-        cy={0}
-        r={20}
-        fill="yellow"
-        stroke={
-          selectedFungus?.model.id === props.fungus.model.id ? "green" : ""
-        }
-        strokeWidth={3}
-        onClick={handleClick}
-      />
-      <text x={props.fungus.model.x-9} y={5}>
-        {props.fungus.model.rootPoints}
-      </text>
+      <g>
+        <ellipse 
+          cx={props.fungus.model.x}
+          cy={-24}
+          rx={28}
+          ry={25}
+          fill-opacity="0.5"
+          stroke-opacity="0.7" 
+          fill={
+            selectedFungus?.model.id === props.fungus.model.id ? "lightgreen" : "transparent"
+          }
+          stroke={
+            selectedFungus?.model.id === props.fungus.model.id ? "lime" : "transparent"
+          }
+        />
+      </g>
+      <g>
+        <image
+          href={`./textures/${selectedFungus?.model.fungusType}_64x64.png`}
+          x={props.fungus.model.x - 26}
+          y={-47}
+          width="50px"
+          height="50px"
+          onClick={handleClick}
+        />
+        <text x={props.fungus.model.x-14} y={20}>
+         RP:{props.fungus.model.rootPoints}
+        </text>
+      </g>
     </g>
   );
 }
