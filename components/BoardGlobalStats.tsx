@@ -1,3 +1,4 @@
+import { useGame } from "@/store";
 import localFont from "@next/font/local";
 
 const RetroGaming = localFont({
@@ -5,8 +6,7 @@ const RetroGaming = localFont({
 });
 export function BoardGlobalStats() {
   const colonies = 1;
-  const root = 1;
-  const trait = 1;
+  const { traitPoints, totalRootPoints, totalColonies } = useGame();
   return (
     <g transform="translate(56.06 225)">
       <path
@@ -26,7 +26,7 @@ export function BoardGlobalStats() {
         transform="translate(56.06 42.52)"
       >
         <tspan x={0} y={0}>
-          Amount of Colonies: {colonies}
+          Amount of Colonies: {totalColonies}
         </tspan>
       </text>
       <text
@@ -36,7 +36,7 @@ export function BoardGlobalStats() {
         transform="translate(56.06 78.5)"
       >
         <tspan x={0} y={0}>
-          Root points: {root}
+          Root points: {totalRootPoints}
         </tspan>
       </text>
       <text
@@ -46,7 +46,7 @@ export function BoardGlobalStats() {
         transform="translate(56.06 114.5)"
       >
         <tspan x={0} y={0}>
-          Trait points: {trait}
+          Trait points: {traitPoints}
         </tspan>
       </text>
       <path

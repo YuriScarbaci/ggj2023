@@ -43,11 +43,11 @@ export function AnchorPoints() {
   return (
     <g>
       {anchorPoints.map((point) => (
-      <g key={`point-${point.x}`}>
-        <g>
-          <image
-              href="./textures/ground_healthy.png"
-              x={point.x}
+        <g key={`point-${point.x}`}>
+          <g>
+            <image
+              href={`./textures/ground_${point.territoryType}.png`}
+              x={point.x - 24}
               y="0"
               width="64"
               height="64"
@@ -86,8 +86,8 @@ export function AnchorPoints() {
                 style={{ cursor: "pointer" }}
               />
             )}
-            </g>
           </g>
+        </g>
       ))}
       {hoverdAnchorPointArcs && <Root arcs={hoverdAnchorPointArcs} />}
     </g>

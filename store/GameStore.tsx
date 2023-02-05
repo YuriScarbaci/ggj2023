@@ -17,6 +17,10 @@ export function useGame() {
 
 export function GameStore(props: React.PropsWithChildren<{}>) {
   const [treeRerenderKey, setTreeRerenderKey] = React.useState(0);
+  const [traitPoints, setTraitPoints] = React.useState(1);
+  const [totalRootPoints, setTotalRootPoints] = React.useState(1);
+  const [totalColonies, setTotalColonies] = React.useState(1);
+
   const fungiTree = React.useMemo(() => new TreeModel(), []);
 
   const rootNode = React.useMemo(
@@ -61,9 +65,10 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       });
       parentNode.addChild(newNode);
       parentNode.model.rootPoints = parentMinusCostMinusShare;
+      setTotalColonies(totalColonies + 1);
       setTreeRerenderKey((o) => o + 1);
     },
-    [fungiTree]
+    [fungiTree, totalColonies]
   );
 
   const anchorPoints = React.useMemo(() => {
@@ -72,8 +77,11 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       id: i === 0 ? rootAnchorPointUid : uuid(),
       x: tToPixel(i - T_WORLD_RADIUS / 2),
       y: 0,
-      territoryType:
-        (i % 3 === 0 ? "colonyPoint" : i % 2 === 0 ? "desert" : "resource" ) as TerritoryType,
+      territoryType: (i % 3 === 0
+        ? "colonyPoint"
+        : i % 2 === 0
+        ? "desert"
+        : "resource") as TerritoryType,
     }));
     return tentativePoints;
 
@@ -82,6 +90,37 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
     //   (p) => !elements.find((e) => e.t <= p.t && e.t + e.amount >= p.t)
     // );
   }, []);
+
+  // score generator
+  const MINUTE_MS = 6000;
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      const resourcesNodes = rootNode.all((node) => {
+        return node.model.territoryType === "resource";
+      });
+      if (resourcesNodes.length) {
+        resourcesNodes.forEach((node) => {
+          node.model.rootPoints += 1;
+        });
+      }
+      const allRootPoints = rootNode.all((node) => {
+        return node.model.rootPoints;
+      });
+      // we must solve the type of node here
+      const getallRootPoints = (allRootPoints: any) => {
+        let rootPointCount = 0;
+        allRootPoints.forEach((node) => {
+          rootPointCount += node.model.rootPoints;
+        });
+        return rootPointCount;
+      };
+      setTotalRootPoints(getallRootPoints(allRootPoints));
+      setTraitPoints(traitPoints + 1);
+      setTreeRerenderKey((o) => o + 1);
+    }, MINUTE_MS);
+
+    return () => clearInterval(interval);
+  }, [rootNode, traitPoints]);
 
   const contextValue = React.useMemo(
     () => ({
@@ -92,6 +131,9 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       anchorPoints,
       addRoot,
       setSelectedFungus,
+      traitPoints,
+      totalRootPoints,
+      totalColonies,
     }),
     [
       treeRerenderKey,
@@ -101,6 +143,9 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       anchorPoints,
       addRoot,
       setSelectedFungus,
+      traitPoints,
+      totalRootPoints,
+      totalColonies,
     ]
   );
 
