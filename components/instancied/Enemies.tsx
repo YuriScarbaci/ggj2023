@@ -1,10 +1,6 @@
 import React from "react";
-import { randomArc } from "@/settings";
-import { ColonyPoint } from "@/store/types";
 import { useGame } from "@/store";
-import { Fungus } from "@/components/elements/Fungus";
 import { Ant } from "@/components/elements/Ant";
-import type TreeModel from "tree-model";
 
 export const Enemies = () => {
   const { enemies } = useGame();

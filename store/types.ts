@@ -38,7 +38,7 @@ export type IGameStoreContext = {
   fungiTree?: TreeModel;
   rootNode: TreeModel.Node<ColonyPoint>;
   selectedFungus?: TreeModel.Node<ColonyPoint>;
-  enemies?:  TreeModel.Node<Enemy>;
+  enemies: Enemy[];
   removeFungus?: () => void;
   anchorPoints: AnchorPoint[];
   traitPoints: number;
@@ -51,3 +51,9 @@ export type IGameStoreContext = {
     React.SetStateAction<TreeModel.Node<ColonyPoint>>
   >;
 };
+
+export type LevelType = {
+  numberOfEnemies: number;
+  types: string[];
+  everyMSTime: number;
+}
