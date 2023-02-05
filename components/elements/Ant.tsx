@@ -8,22 +8,26 @@ interface AntProps {
 }
 
 export function Ant({ ant }: AntProps) {
-  const { removeFungus } = useGame();
+  const { attackFungus, rootNode, getFungusTarget, targets } = useGame();
   const [t, setT] = useState<number>(ant.t);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setT((prevT) => {
-        if((ant.startSide === 'left' && prevT < ant?.target.model.t) || (ant.startSide === 'right' && prevT > ant?.target.model.t)) {
+        if(
+          (ant.startSide === 'left' && prevT < targets[ant.startSide].model.t)
+          || (ant.startSide === 'right' && prevT > targets[ant.startSide].model.t)
+        ) {
           return prevT + (ant.startSide === 'left' ? 1 : -1)
         }
+        attackFungus(targets[ant.startSide], ant, interval);
+        // if (targets[ant.startSide].model.rootPoints)
         clearInterval(interval)
-        removeFungus(ant.target, ant);
         return prevT;
       })
     }, 1200);
     return () => clearInterval(interval);
-  }, [ant, removeFungus]);
+  }, [ant, getFungusTarget, attackFungus, targets, rootNode]);
 
   return (
     <g>
