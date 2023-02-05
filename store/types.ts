@@ -1,5 +1,6 @@
 import type TreeModel from "tree-model";
 import type { useEnemies } from "@/store/game-logics/useEnemies";
+import { useShroomsTree } from "./game-logics/useShroomsTree";
 
 export type TerritoryType =
   | "resource"
@@ -45,7 +46,9 @@ export type IGameStoreContext = {
   rootNode: TreeModel.Node<ColonyPoint>;
   selectedFungus?: TreeModel.Node<ColonyPoint>;
   enemies: Enemy[];
-  removeFungus: ReturnType<typeof useEnemies>["removeFungus"];
+  attackFungus: ReturnType<typeof useEnemies>["attackFungus"];
+  getFungusTarget: ReturnType<typeof useShroomsTree>["getFungusTarget"];
+  targets: Targets;
   anchorPoints: AnchorPoint[];
   traitPoints: number;
   traits: traitsType,
@@ -72,4 +75,9 @@ export type LevelType = {
   numberOfEnemies: number;
   types: Enemy["type"][];
   everyMSTime: number;
+};
+
+export type Targets = {
+  left: TreeModel.Node<ColonyPoint>;
+  right: TreeModel.Node<ColonyPoint>;
 };

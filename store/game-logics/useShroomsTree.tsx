@@ -8,6 +8,7 @@ type Config = {
   selectedTypeOfFungusSelector: "poison" | "colony";
   setTotalColonies: React.Dispatch<React.SetStateAction<number>>;
   addTraitPoints: ReturnType<typeof useTraitPoints>["addTraitPoints"];
+  setTargets: Function;
 };
 
 const canTheRootExpand = ({
@@ -92,6 +93,35 @@ export const useShroomsTree = (config: Config) => {
     })
   );
 
+  React.useEffect(() => {
+    config.setTargets({ left: rootNode, right: rootNode });
+  }, []) // eslint-disable-line
+
+  const getFungusTarget = React.useMemo(
+    () =>
+      (startSide = "left") => {
+        let target: TreeModel.Node<ColonyPoint> = rootNode;
+        rootNode.walk((node: TreeModel.Node<ColonyPoint>) => {
+          if (
+            (startSide === "left" && node.model.t <= target.model.t) ||
+            (startSide === "right" && node.model.t >= target.model.t)
+          ) {
+            target = node;
+          }
+          return true;
+        });
+        return target;
+      },
+    [rootNode]
+  );
+
+  const updateFungusTargets = React.useCallback(() => {
+    const left = getFungusTarget('left');
+    const right = getFungusTarget('right');
+
+    config.setTargets({ left, right });
+  }, [config, getFungusTarget]);
+
   const addRoot = React.useCallback(
     ({
       selectedTypeOfFungusSelector,
@@ -115,10 +145,28 @@ export const useShroomsTree = (config: Config) => {
         expandCost,
         fungiTree,
       });
+      updateFungusTargets();
       handleScores({ anchorPoint, setTotalColonies, addTraitPoints });
       setTreeRerenderKey((o) => o + 1);
     },
-    [fungiTree, setTotalColonies, addTraitPoints]
+    [fungiTree, updateFungusTargets, setTotalColonies, addTraitPoints]
   );
-  return { addRoot, treeRerenderKey, setTreeRerenderKey, fungiTree, rootNode };
+
+  const updateFungus = React.useCallback((fungus: TreeModel.Node<ColonyPoint>) => {
+    fungus.model.rootPoints -= 1;
+    setTreeRerenderKey((o: number) => o + 1);
+  }, []);
+  const removeFungus = React.useCallback((fungus: TreeModel.Node<ColonyPoint>) => {
+    rootNode
+      .all((node: TreeModel.Node<ColonyPoint>) => node.model.id === fungus.model.id)
+      .forEach((node: TreeModel.Node<ColonyPoint>) => {
+        node.drop();
+      });
+
+    updateFungusTargets();
+
+    setTreeRerenderKey((o: number) => o + 1);
+  }, [rootNode, updateFungusTargets]);
+
+  return { addRoot, treeRerenderKey, setTreeRerenderKey, fungiTree, rootNode, getFungusTarget, removeFungus, updateFungus };
 };
