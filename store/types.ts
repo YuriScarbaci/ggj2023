@@ -42,7 +42,6 @@ export type IGameStoreContext = {
   removeFungus?: () => void;
   anchorPoints: AnchorPoint[];
   traitPoints: number;
-  totalRootPoints: number;
   totalColonies: number;
   addRoot: ({}: {
     anchorPoint: AnchorPoint;
