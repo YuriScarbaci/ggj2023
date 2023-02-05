@@ -42,8 +42,25 @@ export function Fungus(props: FungusProps) {
           height="50px"
           onClick={handleClick}
         />
-        <text x={props.fungus.model.x-14} y={20}>
-         RP:{props.fungus.model.rootPoints}
+
+        <ellipse 
+          cx={props.fungus.model.x + 12}
+          cy={15}
+          rx={30}
+          ry={10}
+          fillOpacity="0.3"
+          fill={
+             "black" 
+          }
+
+        />
+        <text
+          x={props.fungus.model.x-14}
+          y={20}
+         fill={props.fungus.model.rootPoints > 0 ? "lime" :"white"}
+ 
+         >
+         RP: {props.fungus.model.rootPoints}
         </text>
       </g>
     </g>
