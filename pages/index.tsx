@@ -2,6 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
+import localFont from "@next/font/local";
+
+const RetroGaming = localFont({
+  src: "../styles/fonts/retro-gaming.ttf",
+});
 
 export default function Home() {
   return (
@@ -17,7 +22,7 @@ export default function Home() {
           style={{
             display: "grid",
             gridTemplateColumns: "1fr",
-            gridTemplateRows: "1fr 1fr",
+            gridTemplateRows: "1fr 1fr 1fr",
             gap: "0px 0px",
             justifyContent: "center",
             alignContent: "center",
@@ -25,21 +30,116 @@ export default function Home() {
             alignItems: "center",
             height: "100%",
             width: "100%",
+            background: "url('./textures/homepage/bg.png')",
+            WebkitBackgroundSize: "cover",
           }}
         >
-          <h2> Imagine some really neat graphic and presentation here!</h2>
+          <div style={{ width: "80%" }}>
+            <img src="./textures/homepage/title.svg" alt="Mushroomize" />
+          </div>
 
-          <Link
-            href="/play"
-            style={{
-              padding: "10px",
-              background: "green",
-              fontSize: "35px",
-              color: "white",
-              borderRadius: "30%",
-            }}
-          >
-            Play
+          <Link href="/play">
+            <div style={{ minWidth: "250px", minHeight: "50px" }}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 228.29 82.61"
+              >
+                <rect
+                  fill="#003534"
+                  x="3.04"
+                  y="4.12"
+                  width="221.08"
+                  height="74.56"
+                />
+                <rect fill="#1e1e1e" y="2.13" width="2.23" height="78.23" />
+                <rect
+                  fill="#1e1e1e"
+                  x="226.06"
+                  y="2.13"
+                  width="2.23"
+                  height="78.23"
+                />
+                <rect
+                  fill="#1e1e1e"
+                  x="2.23"
+                  y="80.36"
+                  width="223.83"
+                  height="2.25"
+                />
+                <rect fill="#1e1e1e" x="2.23" width="223.83" height="2.25" />
+                <text
+                  fill="#fff"
+                  className={RetroGaming.className}
+                  fontSize="18px"
+                  transform="translate(54.56 47.62)"
+                >
+                  <tspan x="0" y="0">
+                    PLAY GAME
+                  </tspan>
+                </text>
+                <path
+                  fill="#494949"
+                  d="M4.77,64.82V5.48H223.52v59.34h2.54V2.13H2.23v62.7h2.54Z"
+                />
+                <path
+                  fill="#2e2e2e"
+                  d="M223.52,38.27v39.83H4.77V38.27H2.23v42.09H226.06V38.27h-2.54Z"
+                />
+              </svg>
+            </div>
+          </Link>
+
+          <Link href="/credits">
+            <div style={{ minWidth: "250px", minHeight: "50px" }}>
+              <svg
+                id="Capa_2"
+                data-name="Capa 2"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 228.29 82.61"
+              >
+                <rect
+                  fill="#001e33"
+                  x="3.04"
+                  y="4.12"
+                  width="221.08"
+                  height="74.56"
+                />
+                <rect fill="#1e1e1e" y="2.13" width="2.23" height="78.23" />
+                <rect
+                  fill="#1e1e1e"
+                  x="226.06"
+                  y="2.13"
+                  width="2.23"
+                  height="78.23"
+                />
+                <rect
+                  fill="#1e1e1e"
+                  x="2.23"
+                  y="80.36"
+                  width="223.83"
+                  height="2.25"
+                />
+                <rect fill="#1e1e1e" x="2.23" width="223.83" height="2.25" />
+                <text
+                  fill="#fff"
+                  className={RetroGaming.className}
+                  fontSize="18px"
+                  transform="translate(64.59 47.62)"
+                >
+                  <tspan x="0" y="0">
+                    CREDITS
+                  </tspan>
+                </text>
+                <path
+                  fill="#494949"
+                  d="M4.77,64.82V5.48H223.52v59.34h2.54V2.13H2.23v62.7h2.54Z"
+                />
+                <path
+                  fill="#2e2e2e"
+                  d="M223.52,38.27v39.83H4.77V38.27H2.23v42.09H226.06V38.27h-2.54Z"
+                />
+              </svg>
+            </div>
           </Link>
         </div>
       </main>

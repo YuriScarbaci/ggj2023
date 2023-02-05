@@ -1,20 +1,21 @@
 import React from "react";
-import { randomArc } from "@/settings";
-import { ColonyPoint } from "@/store/types";
 import { useGame } from "@/store";
-import { Fungus } from "@/components/elements/Fungus";
+import { Enemy, Ant as AntT } from "@/store/types";
 import { Ant } from "@/components/elements/Ant";
-import type TreeModel from "tree-model";
+
+const isAnt = (enemy: Enemy): enemy is AntT => {
+  return enemy.type === "Ant";
+};
 
 export const Enemies = () => {
   const { enemies } = useGame();
   return (
     <g key={"enemies"}>
       {enemies.map((enemy, i) => {
-        if (enemy.type === 'ant') {
-          return <Ant key={`ant-${enemy.id}`} ant={enemy} />
+        if (isAnt(enemy)) {
+          return <Ant key={`ant-${enemy.id}`} ant={enemy} />;
         }
-        return <Ant key={`ant-${enemy.id}`} ant={enemy} />
+        return null;
       })}
     </g>
   );

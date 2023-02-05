@@ -1,6 +1,5 @@
 import localFont from "@next/font/local";
 import { TraitButton } from "./TraitButton";
-import { useTraitPoints } from "@/store/game-logics/useTraitPoints";
 import { useGame } from "@/store";
 
 const RetroGaming = localFont({
@@ -11,7 +10,7 @@ export function BoardTraits() {
   const { traits, treeRerenderKey } = useGame();
 
   return (
-    <g transform="translate(56.06 42.52)" key={treeRerenderKey}>
+    <g transform="translate(56 42)" key={treeRerenderKey}>
       <path fill="#003534" d="M6 6h349v132H6z" />
       <path
         fill="#1e1e1e"
@@ -21,7 +20,7 @@ export function BoardTraits() {
         <text
           fill="#fff"
           className={RetroGaming.className}
-          fontSize="15px"
+          fontSize="12px"
           transform="translate(56 43)"
         >
           <tspan x={0} y={0}>
@@ -35,7 +34,7 @@ export function BoardTraits() {
         <text
           fill="#fff"
           className={RetroGaming.className}
-          fontSize="15px"
+          fontSize="12px"
           transform="translate(56 79)"
         >
           <tspan x={0} y={0}>
@@ -50,7 +49,7 @@ export function BoardTraits() {
         <text
           fill="#fff"
           className={RetroGaming.className}
-          fontSize="15px"
+          fontSize="12px"
           transform="translate(56 115)"
         >
           <tspan x={0} y={0}>

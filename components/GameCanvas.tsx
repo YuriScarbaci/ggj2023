@@ -7,7 +7,7 @@ type IGameCanvasContext = {
   height: number;
 };
 
-const GameCanvasContext = React.createContext<IGameCanvasContext>({
+export const GameCanvasContext = React.createContext<IGameCanvasContext>({
   width: 0,
   height: 0,
 });

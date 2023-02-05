@@ -5,7 +5,13 @@ import { AnchorPoint } from "@/store/types";
 import { Root } from "@/components/elements/Root";
 
 export function AnchorPoints() {
-  const { selectedFungus, addRoot, anchorPoints, rootNode } = useGame();
+  const {
+    selectedFungus,
+    addRoot,
+    anchorPoints,
+    rootNode,
+    selectedTypeOfFungusSelector,
+  } = useGame();
 
   const [hoverAnchorT, setHoverAnchorT] = React.useState<number | null>();
 
@@ -36,9 +42,14 @@ export function AnchorPoints() {
 
   const handleClick = React.useCallback<(arg: AnchorPoint) => void>(
     (anchorPoint) => {
-      if (selectedFungus) addRoot({ anchorPoint, parentNode: selectedFungus });
+      if (selectedFungus)
+        addRoot({
+          anchorPoint,
+          parentNode: selectedFungus,
+          selectedTypeOfFungusSelector,
+        });
     },
-    [addRoot, selectedFungus]
+    [addRoot, selectedFungus, selectedTypeOfFungusSelector]
   );
   return (
     <g>
