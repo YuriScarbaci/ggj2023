@@ -1,11 +1,13 @@
 import type TreeModel from "tree-model";
 
+export type TerritoryType = "resource" | "colonyPoint" | "desert" | "enemySpawnPoint";
+
 export type AnchorPoint = {
   t: number;
   id: string;
   x: number;
   y: number;
-  territoryType: "resource" | "colonyPoint" | "desert" | "enemySpawnPoint";
+  territoryType: TerritoryType;
 };
 
 export type ColonyPoint = {
