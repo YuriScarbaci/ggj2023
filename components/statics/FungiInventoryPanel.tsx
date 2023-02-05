@@ -10,7 +10,9 @@ const RetroGaming = localFont({
 });
 export const FungiInventoryPanel = () => {
   const { width } = React.useContext(GameCanvasContext);
-  const isActive = "venom";
+  const { selectedTypeOfFungusSelector, setSelectedTypeOfFungusSelector } =
+    useGame();
+
   return (
     <g
       id="Capa_1-2"
@@ -45,7 +47,7 @@ export const FungiInventoryPanel = () => {
             </tspan>
           </text>
         </g>
-        <g id="a_button-active">
+        {/* <g id="a_button-active">
           <path fill="#22990a" d="M40.26 87.2h24v24h-24z" />
           <path d="M40.26 87.2h1v24h-1z" fill="#025104" />
           <path d="M64.26 110.19v1h-24v-1z" fill="#025104" />
@@ -80,11 +82,12 @@ export const FungiInventoryPanel = () => {
               {"Z"}
             </tspan>
           </text>
-        </g>
+        </g> */}
       </g>
       <image
+        onClick={() => setSelectedTypeOfFungusSelector("colony")}
         href={`./textures/colony_${
-          isActive === "colony" ? "active" : "inactive"
+          selectedTypeOfFungusSelector === "colony" ? "active" : "inactive"
         }.png`}
         transform="translate(93.37 153.74)"
         id="colony"
@@ -92,8 +95,9 @@ export const FungiInventoryPanel = () => {
         height="70"
       />
       <image
+        onClick={() => setSelectedTypeOfFungusSelector("poison")}
         href={`./textures/venom_${
-          isActive === "venom" ? "active" : "inactive"
+          selectedTypeOfFungusSelector === "poison" ? "active" : "inactive"
         }.png`}
         transform="translate(90.37 61.2)"
         id="venom"

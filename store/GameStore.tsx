@@ -24,7 +24,8 @@ export const LEVEL_1: LevelType = {
 export function GameStore(props: React.PropsWithChildren<{}>) {
   const [totalColonies, setTotalColonies] = React.useState(1);
   const { anchorPoints } = useAnchorPoints();
-
+  const [selectedTypeOfFungusSelector, setSelectedTypeOfFungusSelector] =
+    React.useState<"poison" | "colony">("colony");
   const { triggerEvent, subscribeEvent, unsubscribeEvent } = useEvents();
   const {
     traitPoints,
@@ -34,11 +35,17 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
   } = useTraitPoints();
   const { addRoot, treeRerenderKey, setTreeRerenderKey, fungiTree, rootNode } =
     useShroomsTree({
+      selectedTypeOfFungusSelector,
       setTotalColonies,
       addTraitPoints,
     });
 
-  const { enemies, removeFungus } = useEnemies({ rootNode, currentLevel: LEVEL_1, setTreeRerenderKey });
+  const { enemies, removeFungus } = useEnemies({
+    rootNode,
+    currentLevel: LEVEL_1,
+    setTreeRerenderKey,
+  });
+
   const [selectedFungus, setSelectedFungus] =
     React.useState<TreeModel.Node<ColonyPoint>>(rootNode);
 
@@ -55,6 +62,8 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       totalColonies,
       enemies,
       removeFungus,
+      selectedTypeOfFungusSelector,
+      setSelectedTypeOfFungusSelector,
     }),
     [
       treeRerenderKey,
@@ -68,6 +77,8 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       totalColonies,
       enemies,
       removeFungus,
+      selectedTypeOfFungusSelector,
+      setSelectedTypeOfFungusSelector,
     ]
   );
 

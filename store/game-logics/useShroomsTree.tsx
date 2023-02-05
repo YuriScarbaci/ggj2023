@@ -5,6 +5,7 @@ import { useTraitPoints } from "@/store/game-logics/useTraitPoints";
 import TreeModel from "tree-model";
 
 type Config = {
+  selectedTypeOfFungusSelector: "poison" | "colony";
   setTotalColonies: React.Dispatch<React.SetStateAction<number>>;
   addTraitPoints: ReturnType<typeof useTraitPoints>["addTraitPoints"];
 };
@@ -39,11 +40,13 @@ const handleScores = ({
   if (anchorPoint.territoryType === "colonyPoint") addTraitPoints(1);
 };
 const handleNodesRootPointsAndChildren = ({
+  selectedTypeOfFungusSelector,
   anchorPoint,
   parentNode,
   expandCost,
   fungiTree,
 }: {
+  selectedTypeOfFungusSelector: "poison" | "colony";
   anchorPoint: AnchorPoint;
   parentNode: TreeModel.Node<ColonyPoint>;
   expandCost: number;
@@ -52,7 +55,11 @@ const handleNodesRootPointsAndChildren = ({
   const parentMinusCost = parentNode.model.rootPoints - expandCost;
   const newRootPoints = Math.floor(parentMinusCost / 2);
   const newPointType =
-    anchorPoint.territoryType === "colonyPoint" ? "colony" : "resource";
+    anchorPoint.territoryType === "colonyPoint"
+      ? selectedTypeOfFungusSelector === "colony"
+        ? "colony"
+        : "poison"
+      : "resource";
   const parentMinusCostMinusShare =
     newPointType === "colony"
       ? parentMinusCost - newRootPoints
@@ -87,9 +94,11 @@ export const useShroomsTree = (config: Config) => {
 
   const addRoot = React.useCallback(
     ({
+      selectedTypeOfFungusSelector,
       anchorPoint,
       parentNode,
     }: {
+      selectedTypeOfFungusSelector: "poison" | "colony";
       anchorPoint: AnchorPoint;
       parentNode: TreeModel.Node<ColonyPoint>;
     }) => {
@@ -100,6 +109,7 @@ export const useShroomsTree = (config: Config) => {
         return null;
 
       handleNodesRootPointsAndChildren({
+        selectedTypeOfFungusSelector,
         anchorPoint,
         parentNode,
         expandCost,

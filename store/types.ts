@@ -45,7 +45,12 @@ export type IGameStoreContext = {
   anchorPoints: AnchorPoint[];
   traitPoints: number;
   totalColonies: number;
+  selectedTypeOfFungusSelector: "poison" | "colony";
+  setSelectedTypeOfFungusSelector: React.Dispatch<
+    React.SetStateAction<"poison" | "colony">
+  >;
   addRoot: ({}: {
+    selectedTypeOfFungusSelector: "poison" | "colony";
     anchorPoint: AnchorPoint;
     parentNode: TreeModel.Node<ColonyPoint>;
   }) => void;
