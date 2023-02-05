@@ -49,16 +49,12 @@ export function Fungus(props: FungusProps) {
           rx={30}
           ry={10}
           fillOpacity="0.3"
-          fill={
-             "black" 
-          }
-
+          fill="black"
         />
         <text
           x={props.fungus.model.x-14}
           y={20}
          fill={props.fungus.model.rootPoints > 0 ? "lime" :"white"}
- 
          >
          RP: {props.fungus.model.rootPoints}
         </text>
