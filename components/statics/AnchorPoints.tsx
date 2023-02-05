@@ -43,24 +43,51 @@ export function AnchorPoints() {
   return (
     <g>
       {anchorPoints.map((point) => (
-        <>
-          {Boolean(
-            rootNode.first((node) => node.model.id === point.id)
-          ) ? null : (
-            <circle
-              key={`anchor-${point.x}`}
-              data-t={point.t}
-              cx={point.x}
-              cy={0}
-              r={10}
-              fill="rgb(0,0,0,0.1)"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              onClick={(e) => handleClick(point)}
-              style={{ cursor: "pointer" }}
+      <g key={`point-${point.x}`}>
+        <g>
+          <image
+              href="./textures/ground_healthy.png"
+              x={point.x}
+              y="0"
+              width="64"
+              height="64"
             />
-          )}
-        </>
+            <image
+              href="./textures/ground_underground.png"
+              x={point.x}
+              y="63"
+              width="64"
+              height="64"
+            />
+            <image
+              href="./textures/ground_underground.png"
+              x={point.x}
+              y="120"
+              width="64"
+              height="64"
+            />
+          </g>
+          <g>
+            {Boolean(
+              rootNode.first((node) => node.model.id === point.id)
+            ) ? null : (
+              <ellipse
+                key={`anchor-${point.x}`}
+                data-t={point.t}
+                cx={point.x}
+                cy={2}
+                ry={4}
+                rx={8}
+                fill="brown"
+                fillOpacity="0.7"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={(e) => handleClick(point)}
+                style={{ cursor: "pointer" }}
+              />
+            )}
+            </g>
+          </g>
       ))}
       {hoverdAnchorPointArcs && <Root arcs={hoverdAnchorPointArcs} />}
     </g>

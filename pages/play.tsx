@@ -19,8 +19,8 @@ export default function Home() {
             <Background />
             <GameCamera>
               <Soil>
-                <FungiColonies />
                 <AnchorPoints />
+                <FungiColonies />
               </Soil>
             </GameCamera>
           </GameCanvas>

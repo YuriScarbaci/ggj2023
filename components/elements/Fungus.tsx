@@ -23,8 +23,8 @@ export function Fungus(props: FungusProps) {
           cy={-24}
           rx={28}
           ry={25}
-          fill-opacity="0.5"
-          stroke-opacity="0.7" 
+          fillOpacity="0.5"
+          strokeOpacity="0.7" 
           fill={
             selectedFungus?.model.id === props.fungus.model.id ? "lightgreen" : "transparent"
           }

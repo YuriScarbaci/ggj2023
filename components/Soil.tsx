@@ -15,22 +15,6 @@ export function Soil(props: React.PropsWithChildren<{}>) {
         height={size.height / 4}
         fill="url(#soil)"
       />
-      <defs>
-        <pattern
-          id="soil"
-          patternUnits="userSpaceOnUse"
-          width="1000"
-          height="270"
-        >
-          <image
-            href="./textures/soil2.png"
-            x="0"
-            y="-60"
-            width="1000"
-            height="319"
-          />
-        </pattern>
-      </defs>
       <g>{props.children}</g>
     </g>
   );
