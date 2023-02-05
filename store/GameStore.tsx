@@ -107,7 +107,9 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
         return node.model.rootPoints;
       });
       // we must solve the type of node here
-      const getallRootPoints = (allRootPoints: any) => {
+      const getallRootPoints = (
+        allRootPoints: TreeModel.Node<ColonyPoint>[]
+      ) => {
         let rootPointCount = 0;
         allRootPoints.forEach((node) => {
           rootPointCount += node.model.rootPoints;
