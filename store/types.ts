@@ -28,11 +28,12 @@ export type Enemy = {
   points: number;
   target: any;
   startSide: string;
+  type: "Ant" | "moreToCome";
 };
 
-export type Ant = {
-  type: 'Ant';
-} & Enemy;
+export interface Ant extends Enemy {
+  type: "Ant";
+}
 
 export type IGameStoreContext = {
   treeRerenderKey: number;
@@ -55,6 +56,6 @@ export type IGameStoreContext = {
 
 export type LevelType = {
   numberOfEnemies: number;
-  types: string[];
+  types: Enemy["type"][];
   everyMSTime: number;
 };

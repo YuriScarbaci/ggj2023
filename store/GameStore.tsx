@@ -17,7 +17,7 @@ export function useGame() {
 
 export const LEVEL_1: LevelType = {
   numberOfEnemies: 6,
-  types: ["ant"],
+  types: ["Ant"],
   everyMSTime: 4000,
 };
 
