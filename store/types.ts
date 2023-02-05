@@ -1,4 +1,5 @@
 import type TreeModel from "tree-model";
+import type { useEnemies } from "@/store/game-logics/useEnemies";
 
 export type TerritoryType =
   | "resource"
@@ -27,7 +28,7 @@ export type Ant = {
   points: number;
   target: any;
   startSide: string;
-}
+};
 
 export type Enemy = {
   type: string;
@@ -39,7 +40,7 @@ export type IGameStoreContext = {
   rootNode: TreeModel.Node<ColonyPoint>;
   selectedFungus?: TreeModel.Node<ColonyPoint>;
   enemies: Enemy[];
-  removeFungus?: () => void;
+  removeFungus: ReturnType<typeof useEnemies>["removeFungus"];
   anchorPoints: AnchorPoint[];
   traitPoints: number;
   totalColonies: number;
@@ -56,4 +57,4 @@ export type LevelType = {
   numberOfEnemies: number;
   types: string[];
   everyMSTime: number;
-}
+};

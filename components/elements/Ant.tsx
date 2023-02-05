@@ -23,7 +23,7 @@ export function Ant({ ant }: AntProps) {
       })
     }, 1200);
     return () => clearInterval(interval);
-  }, []);
+  }, [ant, removeFungus]);
 
   return (
     <g>
