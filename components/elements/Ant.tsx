@@ -14,17 +14,19 @@ export function Ant({ ant }: AntProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       setT((prevT) => {
-        if(
-          (ant.startSide === 'left' && prevT < targets[ant.startSide].model.t)
-          || (ant.startSide === 'right' && prevT > targets[ant.startSide].model.t)
-        ) {
-          return prevT + (ant.startSide === 'left' ? 1 : -1)
+        const targetBySide = targets[ant.startSide];
+        if (targetBySide) {
+          if (
+            (ant.startSide === "left" && prevT < targetBySide.model.t) ||
+            (ant.startSide === "right" && prevT > targetBySide.model.t)
+          ) {
+            return prevT + (ant.startSide === "left" ? 1 : -1);
+          }
+          attackFungus(targetBySide, ant, interval);
+          clearInterval(interval);
         }
-        attackFungus(targets[ant.startSide], ant, interval);
-        // if (targets[ant.startSide].model.rootPoints)
-        clearInterval(interval)
         return prevT;
-      })
+      });
     }, 1200);
     return () => clearInterval(interval);
   }, [ant, getFungusTarget, attackFungus, targets, rootNode]);
@@ -33,7 +35,7 @@ export function Ant({ ant }: AntProps) {
     <g>
       <image
         href={`./ant-walk-${ant.startSide}.gif`}
-        x={tToPixel(t) + (ant.startSide === 'left' ? -50 : 0)}
+        x={tToPixel(t) + (ant.startSide === "left" ? -50 : 0)}
         y={-35}
         width="50px"
         height="50px"

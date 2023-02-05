@@ -3,7 +3,7 @@ import TreeModel from "tree-model";
 import { v4 as uuid } from "uuid";
 import { ColonyPoint, Enemy, LevelType } from "@/store/types";
 
-export const START_SIDES = ["left", "right"];
+export const START_SIDES = ["left", "right"] as const;
 type EnemyConfig = {
   currentLevel: LevelType;
   getFungusTarget: Function;
@@ -41,32 +41,30 @@ export const useEnemies = ({
       });
     }, currentLevel.everyMSTime);
     return () => clearInterval(interval);
-  }, [
-    currentLevel,
-    getFungusTarget,
-    setEnemies,
-  ]);
+  }, [currentLevel, getFungusTarget, setEnemies]);
 
-  const attackFungus = (fungus: TreeModel.Node<ColonyPoint>, enemy: Enemy, interval: any) => {
-    switch(fungus.model.fungusType) {
-      case "poison": 
+  const attackFungus = (
+    fungus: TreeModel.Node<ColonyPoint>,
+    enemy: Enemy,
+    interval: any
+  ) => {
+    switch (fungus.model.fungusType) {
+      case "poison":
         setEnemies((prevEnemies) =>
           prevEnemies.filter((el: Enemy) => el.id !== enemy.id)
         );
         removeFungus(fungus);
         break;
-      default: 
+      default:
         if (fungus.model.rootPoints > 0) {
           updateFungus(fungus);
         } else {
           removeFungus(fungus);
           clearInterval(interval);
         }
-        break
+        break;
     }
-    
-  }
-
+  };
 
   return {
     attackFungus,

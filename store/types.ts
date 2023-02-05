@@ -28,7 +28,7 @@ export type Enemy = {
   t: number;
   points: number;
   target: any;
-  startSide: string;
+  startSide: "left" | "right";
   type: "Ant" | "moreToCome";
 };
 
@@ -37,7 +37,19 @@ export interface Ant extends Enemy {
 }
 
 export type traitsType = {
-  poison: number; psyco: number; hp: number; 
+  poison: number;
+  psyco: number;
+  hp: number;
+};
+export type LevelType = {
+  numberOfEnemies: number;
+  types: Enemy["type"][];
+  everyMSTime: number;
+};
+
+export type Targets = {
+  left: TreeModel.Node<ColonyPoint> | null;
+  right: TreeModel.Node<ColonyPoint> | null;
 };
 
 export type IGameStoreContext = {
@@ -51,11 +63,11 @@ export type IGameStoreContext = {
   targets: Targets;
   anchorPoints: AnchorPoint[];
   traitPoints: number;
-  traits: traitsType,
-  addTraitPoints: (n: number, name: string) => void,
-  spendTraitPoints: (n: number, name: string) => void,
-  canSpendTraitsPoints: () => boolean,
-  revertTrait: (n: number, name: string) => void,
+  traits: traitsType;
+  addTraitPoints: (n: number, name: string) => void;
+  spendTraitPoints: (n: number, name: keyof traitsType) => void;
+  canSpendTraitsPoints: () => boolean;
+  revertTrait: (n: number, name: keyof traitsType) => void;
   totalColonies: number;
   selectedTypeOfFungusSelector: "poison" | "colony";
   setSelectedTypeOfFungusSelector: React.Dispatch<
@@ -69,15 +81,4 @@ export type IGameStoreContext = {
   setSelectedFungus: React.Dispatch<
     React.SetStateAction<TreeModel.Node<ColonyPoint>>
   >;
-};
-
-export type LevelType = {
-  numberOfEnemies: number;
-  types: Enemy["type"][];
-  everyMSTime: number;
-};
-
-export type Targets = {
-  left: TreeModel.Node<ColonyPoint>;
-  right: TreeModel.Node<ColonyPoint>;
 };

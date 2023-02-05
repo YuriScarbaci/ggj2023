@@ -36,7 +36,10 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
     revertTrait,
   } = useTraitPoints();
 
-  const [targets, setTargets] = React.useState({ left: null, right: null });
+  const [targets, setTargets] = React.useState<{
+    left: TreeModel.Node<ColonyPoint> | null;
+    right: TreeModel.Node<ColonyPoint> | null;
+  }>({ left: null, right: null });
 
   const {
     addRoot,
@@ -47,16 +50,20 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
     getFungusTarget,
     removeFungus,
     updateFungus,
-  } =
-    useShroomsTree({
-      selectedTypeOfFungusSelector,
-      setTotalColonies,
-      addTraitPoints,
-      setTargets,
-    });
+  } = useShroomsTree({
+    selectedTypeOfFungusSelector,
+    setTotalColonies,
+    addTraitPoints,
+    setTargets,
+  });
 
-  const { enemies, attackFungus } = useEnemies({ currentLevel: LEVEL_1, updateFungus, getFungusTarget, removeFungus });
-  
+  const { enemies, attackFungus } = useEnemies({
+    currentLevel: LEVEL_1,
+    updateFungus,
+    getFungusTarget,
+    removeFungus,
+  });
+
   const [selectedFungus, setSelectedFungus] =
     React.useState<TreeModel.Node<ColonyPoint>>(rootNode);
 
