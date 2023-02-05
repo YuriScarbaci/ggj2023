@@ -23,3 +23,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+svg text{
+  font-family: RetroGaming, 'Retro Gaming';
+  font-size: 18px;
+}
