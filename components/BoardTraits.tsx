@@ -9,7 +9,7 @@ export function BoardTraits() {
   const poison = 1;
   const psychedelics = 1;
   return (
-    <g transform="translate(56.06 42.52)">
+    <g transform="translate(56, 42)">
       <path fill="#003534" d="M6 6h349v132H6z" />
       <path
         fill="#1e1e1e"

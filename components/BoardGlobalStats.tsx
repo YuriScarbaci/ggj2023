@@ -7,7 +7,7 @@ const RetroGaming = localFont({
 export function BoardGlobalStats() {
   const { traitPoints, totalColonies } = useGame();
   return (
-    <g transform="translate(56.06 225)">
+    <g transform="translate(56, 225)">
       <g id="global-stats-panel" transform="scale(1,0.75)">
         <path
           id="global-stats-panel-background"

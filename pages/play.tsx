@@ -9,6 +9,7 @@ import { Soil } from "@/components/Soil";
 import { AnchorPoints } from "@/components/statics/AnchorPoints";
 import { FungiColonies } from "@/components/instancied/FungiColonies";
 import { BoardTraits } from "@/components/BoardTraits";
+import { FungiInventoryPanel } from "@/components/statics/FungiInventoryPanel";
 import { BoardGlobalStats } from "@/components/BoardGlobalStats";
 import { Enemies } from "@/components/instancied/Enemies";
 
@@ -19,6 +20,7 @@ export default function Home() {
         <GameStore>
           <GameCanvas>
             <Background />
+            <FungiInventoryPanel />
             <BoardTraits />
             <BoardGlobalStats />
             <GameCamera>
