@@ -129,6 +129,10 @@ export function GameStore(props: React.PropsWithChildren<{}>) {
       const newRootPoints = Math.floor(parentMinusCost / 2);
       const parentMinusCostMinusShare = parentMinusCost - newRootPoints;
       // updateTargetEnemies();
+      if(parentMinusCost <0){
+        return null;
+      }
+
       const newNode = fungiTree.parse({
         ...anchorPoint,
         fungusType: "colony",
